@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		html {
+			background-color: #333;
+		}
+
+		div {
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			margin: 50px;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+
+		function generateColors(type, howMany) {
+			let result = []
+			let tempColor
+
+			const minHex = 1048576
+			const maxHex = 16777215
+			const minRGB = 0
+			const maxRGB = 255
+
+			/* type.toLowerCase() in case of a HEX or RGB type */
+
+			for (let x = 0; x < howMany; x++) {
+				if (type.toLowerCase() == "hex") {
+					tempColor = getRandomNumber(minHex, maxHex)
+						.toString(16)
+					result.push(`#${tempColor}`)
+				}
+
+				if (type.toLowerCase() == "rgb") {
+					/* Without backticks because of codeSnap 😁 */
+					tempColor = "rgb(" +
+						getRandomNumber(minRGB, maxRGB) + "," +
+						getRandomNumber(minRGB, maxRGB) + "," +
+						getRandomNumber(minRGB, maxRGB) + ")"
+					result.push(tempColor)
+				}
+			}
+			console.log(result);
+			return result
+		}
+
+		function getRandomNumber(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) + min)
+		}
+
+		/* 		
+generateColors("hex", 3) // ["#a014d8","#ba2240","#9a82f1"]
+generateColors("rgb", 2) // ["rgb(213,77,143)","rgb(156,29,34)"]
+		 */
+
+		let temp1 = generateColors("hex", 6)
+		let temp2 = generateColors("rgb", 6)
+
+		temp1.forEach(elm => {
+			let tempNode = document.createElement("div")
+			tempNode.style.backgroundColor = elm
+			document.body.appendChild(tempNode)
+		})
+		temp2.forEach(elm => {
+			let tempNode = document.createElement("div")
+			tempNode.style.backgroundColor = elm
+			document.body.appendChild(tempNode)
+		})
+
+	</script>
+</body>
+
+</html>
